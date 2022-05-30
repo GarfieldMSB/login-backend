@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { fetchSinToken, fetchConToken } from "../helpers/fetch";
 import { types } from "../types/types";
@@ -12,10 +11,10 @@ export const startRegister = (
   password
 ) => {
   return async (dispatch) => {
-    const id_usuario = new Date().getTime();
+    const uid = new Date().getTime();
     const resp = await fetchSinToken(
       "auth/new",
-      { id_usuario, name, lastname1, lastname2, email, password },
+      { uid, name, lastname1, lastname2, email, password },
       "POST"
     );
     const body = await resp.json();
@@ -23,7 +22,7 @@ export const startRegister = (
     if (body.ok) {
       dispatch(
         register({
-          uid: body.id_usuario,
+          uid: body.uid,
           name: body.name,
         })
       );

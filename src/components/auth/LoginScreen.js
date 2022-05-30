@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { startLogin } from "../../actions/auth";
 import { useForm } from "../../hooks/useForm";
 import "./LoginScreen.css";
@@ -39,7 +39,6 @@ export const LoginScreen = () => {
   const { lEmail, lPassword } = formLoginValues;
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
