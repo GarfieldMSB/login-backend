@@ -101,7 +101,7 @@ export const RegisterScreen = () => {
               rowSpacing={2}
               columnSpacing={{ xs: 1, sm: 2, md: 1 }}
             >
-              <Grid item xs={4}>
+              <Grid item xs={12} sm={4} md={4}>
                 <TextField
                   fullWidth
                   id="rName"
@@ -112,7 +112,7 @@ export const RegisterScreen = () => {
                   onChange={handleLoginInputChange}
                 />
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={12} sm={4} md={4}>
                 <TextField
                   fullWidth
                   id="rLastname1"
@@ -123,7 +123,7 @@ export const RegisterScreen = () => {
                   onChange={handleLoginInputChange}
                 />
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={12} sm={4} md={4}>
                 <TextField
                   fullWidth
                   id="rLastname2"
