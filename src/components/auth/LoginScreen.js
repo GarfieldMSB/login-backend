@@ -1,10 +1,21 @@
-import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { Button, Card, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField, Typography } from '@mui/material';
-import React from 'react'
-import { useDispatch } from 'react-redux';
-import { startLogin } from '../../actions/auth';
-import { useForm } from '../../hooks/useForm';
-import './LoginScreen.css'
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import {
+  Button,
+  Card,
+  FormControl,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
+  TextField,
+  Typography,
+} from "@mui/material";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import { startLogin } from "../../actions/auth";
+import { useForm } from "../../hooks/useForm";
+import "./LoginScreen.css";
 
 export const LoginScreen = () => {
   const [values, setValues] = React.useState({
@@ -25,14 +36,15 @@ export const LoginScreen = () => {
     lEmail: "michelle@gmail.com",
     lPassword: "123456",
   });
-  const {lEmail, lPassword} = formLoginValues;
+  const { lEmail, lPassword } = formLoginValues;
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
-    e.preventDefault()
-    dispatch(startLogin(lEmail, lPassword))
-  }
+    e.preventDefault();
+    dispatch(startLogin(lEmail, lPassword));
+  };
 
   return (
     <div className="container">
@@ -42,45 +54,58 @@ export const LoginScreen = () => {
             Login
           </Typography>
         </div>
-        <Card className='card-container' sx={{ mb: 20 }}>
-            <TextField fullWidth label="Correo" id="email" margin="normal" 
-               name='lEmail'
-               value={lEmail}
-               onChange={handleLoginInputChange}
-            />
+        <Card className="card-container" sx={{ mb: 20 }}>
+          <TextField
+            fullWidth
+            label="Correo"
+            id="email"
+            margin="normal"
+            name="lEmail"
+            value={lEmail}
+            onChange={handleLoginInputChange}
+          />
 
-            <FormControl sx={{ width: "100%" }} variant="outlined">
-              <InputLabel htmlFor="outline d-adornment-password">
-                Password
-              </InputLabel>
-              <OutlinedInput
-                id="password"
-                name='lPassword'
-                type={values.showPassword ? "text" : "password"}
-                value={lPassword}
-                onChange={handleLoginInputChange}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-                label="Contraseña"
-              />
-            </FormControl>
-            <div className="auth-button">
-              <Button onClick={handleLogin} variant="contained" color="success" sx={{ p: "20 10%" }}>
-                Iniciar sesión
-              </Button>
-            </div>
+          <FormControl sx={{ width: "100%" }} variant="outlined">
+            <InputLabel htmlFor="outline d-adornment-password">
+              Password
+            </InputLabel>
+            <OutlinedInput
+              id="password"
+              name="lPassword"
+              type={values.showPassword ? "text" : "password"}
+              value={lPassword}
+              onChange={handleLoginInputChange}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              label="Contraseña"
+            />
+          </FormControl>
+          <Link to="../register">
+            <Typography sx={{margin: '10px'}} variant="body1">¿No se encuentra registrado? Click aquí</Typography>
+          </Link>
+          
+          <div className="auth-button">
+            <Button
+              onClick={handleLogin}
+              variant="contained"
+              color="success"
+              sx={{ p: "20 10%" }}
+            >
+              Iniciar sesión
+            </Button>
+          </div>
         </Card>
       </div>
     </div>
-  )
-}
+  );
+};

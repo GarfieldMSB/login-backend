@@ -1,48 +1,101 @@
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import { fetchSinToken, fetchConToken } from "../helpers/fetch";
 import { types } from "../types/types";
 
+export const startRegister = (
+  navigate,
+  name,
+  lastname1,
+  lastname2,
+  email,
+  password
+) => {
+  return async (dispatch) => {
+    const id_usuario = new Date().getTime();
+    const resp = await fetchSinToken(
+      "auth/new",
+      { id_usuario, name, lastname1, lastname2, email, password },
+      "POST"
+    );
+    const body = await resp.json();
+
+    if (body.ok) {
+      dispatch(
+        register({
+          uid: body.id_usuario,
+          name: body.name,
+        })
+      );
+      navigate("login");
+      Swal.fire("¡Buen trabajo!", "Registrado", "success");
+    } else {
+      Swal.fire("Error", body.msg, "error");
+    }
+  };
+};
 
 export const startLogin = (email, password) => {
-    return async(dispatch) => {
-        const resp = await fetchSinToken('auth/login', {email, password}, 'POST');
-        const body = await resp.json();
-        
-        if(body.ok){
-            localStorage.setItem('token', body.token)
-            localStorage.setItem('token-init-day', new Date().getTime())
+  return async (dispatch) => {
+    const resp = await fetchSinToken("auth/login", { email, password }, "POST");
+    const body = await resp.json();
 
-            dispatch(login({
-                uid: body.rut,
-                name: body.name
-            }))
-        }
+    if (body.ok) {
+      localStorage.setItem("token", body.token);
+      localStorage.setItem("token-init-date", new Date().getTime());
+
+      dispatch(
+        login({
+          uid: body.uid,
+          name: body.name,
+        })
+      );
+    } else {
+      Swal.fire("Error", body.msg, "error");
     }
-}
+  };
+};
 
 export const startChecking = () => {
-    return async(dispatch) => {
-        const resp = await fetchConToken('auth/renew/');
-        const body = await resp.json();
-        
-        if(body.ok){
-            localStorage.setItem('token', body.token)
-            localStorage.setItem('token-init-day', new Date().getTime())
+  return async (dispatch) => {
+    const resp = await fetchConToken("auth/renew/");
+    const body = await resp.json();
 
-            dispatch(login({
-                uid: body.rut,
-                name: body.name
-            }))
-        } else {
-            dispatch( checkingFinish() )
-        }
+    if (body.ok) {
+      localStorage.setItem("token", body.token);
+      localStorage.setItem("token-init-date", new Date().getTime());
+
+      dispatch(
+        login({
+          uid: body.uid,
+          name: body.name,
+        })
+      );
+    } else {
+      dispatch(checkingFinish());
+    }
+  };
+};
+
+const checkingFinish = () => ({
+  type: types.authChekingFinish,
+});
+
+const login = (user) => ({
+  type: types.authLogin,
+  payload: user,
+});
+
+const register = (user) => ({
+  type: types.authStartRegister,
+  payload: user,
+});
+
+export const startLogout = () => {
+    return( dispatch ) => {
+        localStorage.clear();
+        dispatch( logout() )
     }
 }
 
-const checkingFinish = () => ({
-    type: types.authChekingFinish
-})
-
-const login = (user) => ({
-    type: types.authLogin,
-    payload: user
-})
+const logout = () => ({ type: types.authLogout })
