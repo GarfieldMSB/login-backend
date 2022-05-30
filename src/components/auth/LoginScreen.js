@@ -33,9 +33,10 @@ export const LoginScreen = () => {
 
   //Hook Formulario
   const [formLoginValues, handleLoginInputChange] = useForm({
-    lEmail: "michelle@gmail.com",
-    lPassword: "123456",
+    lEmail: "",
+    lPassword: "",
   });
+
   const { lEmail, lPassword } = formLoginValues;
 
   const dispatch = useDispatch();

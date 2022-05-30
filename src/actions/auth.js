@@ -1,9 +1,11 @@
+import { useId } from "react";
 import Swal from "sweetalert2";
 import { fetchSinToken, fetchConToken } from "../helpers/fetch";
 import { types } from "../types/types";
 
 export const startRegister = (
   navigate,
+  uid,
   name,
   lastname1,
   lastname2,
@@ -11,7 +13,7 @@ export const startRegister = (
   password
 ) => {
   return async (dispatch) => {
-    const uid = new Date().getTime();
+    //const uid = new Date().getTime();
     const resp = await fetchSinToken(
       "auth/new",
       { uid, name, lastname1, lastname2, email, password },

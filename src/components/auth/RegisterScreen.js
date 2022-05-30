@@ -12,13 +12,14 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useId } from "react";
 import { useDispatch } from "react-redux";
-import { Link, Navigate, NavLink, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { startLogin, startRegister } from "../../actions/auth";
 import { useForm } from "../../hooks/useForm";
+import  nextId  from "react-id-generator" ;
 import "./LoginScreen.css";
+import { startRegister } from "../../actions/auth";
 
 export const RegisterScreen = () => {
   const [values, setValues] = React.useState({
@@ -36,6 +37,16 @@ export const RegisterScreen = () => {
 
   //Hook Formulario
   const [formLoginValues, handleLoginInputChange] = useForm({
+    rName: "",
+    rLastname1: "",
+    rLastname2: "",
+    rEmail: "",
+    rRepeatEmail: "",
+    rPassword: "",
+    rRepeatPass: "",
+  });
+  /*
+  const [formLoginValues, handleLoginInputChange] = useForm({
     rName: "Michelle",
     rLastname1: "Ibarra",
     rLastname2: "",
@@ -44,6 +55,8 @@ export const RegisterScreen = () => {
     rPassword: "123456",
     rRepeatPass: "123456",
   });
+  */
+
   const {
     rName,
     rLastname1,
@@ -56,6 +69,7 @@ export const RegisterScreen = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const uid = nextId("user");
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -66,8 +80,9 @@ export const RegisterScreen = () => {
     if (rPassword !== rRepeatPass) {
       return Swal.fire("Error", "Las contraseñas no son identicas");
     }
+    
     dispatch(
-      startRegister(navigate, rName, rLastname1, rLastname2, rEmail, rPassword)
+      startRegister(navigate, uid, rName, rLastname1, rLastname2, rEmail, rPassword)
     );
   };
 
