@@ -1,4 +1,3 @@
-import { useId } from "react";
 import Swal from "sweetalert2";
 import { fetchSinToken, fetchConToken } from "../helpers/fetch";
 import { types } from "../types/types";
@@ -13,6 +12,7 @@ export const startRegister = (
   password
 ) => {
   return async (dispatch) => {
+    dispatch(startLog());
     //const uid = new Date().getTime();
     const resp = await fetchSinToken(
       "auth/new",
@@ -29,7 +29,7 @@ export const startRegister = (
         })
       );
       navigate("login");
-      Swal.fire("¡Buen trabajo!", "Registrado", "success");
+      Swal.fire("¡Buen trabajo!", body.msg, "success");
     } else {
       Swal.fire("Error", body.msg, "error");
     }
@@ -38,6 +38,7 @@ export const startRegister = (
 
 export const startLogin = (email, password) => {
   return async (dispatch) => {
+    dispatch(startLog());
     const resp = await fetchSinToken("auth/login", { email, password }, "POST");
     const body = await resp.json();
 
@@ -54,6 +55,7 @@ export const startLogin = (email, password) => {
     } else {
       Swal.fire("Error", body.msg, "error");
     }
+    
   };
 };
 
@@ -80,6 +82,10 @@ export const startChecking = () => {
 
 const checkingFinish = () => ({
   type: types.authChekingFinish,
+});
+
+const startLog = () => ({
+  type: types.authStartLogin,
 });
 
 const login = (user) => ({

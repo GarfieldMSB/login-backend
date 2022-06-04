@@ -8,6 +8,10 @@ const initialState = {
 
 export const authReducer = (state = initialState, action) => {
     switch (action.type) {
+        case types.authStartLogin:
+            return{
+                checking: true,
+            }
         case types.authLogin:
             return {
                 ...state,

@@ -20,9 +20,9 @@ export const AppRouter = () => {
   }, [dispatch])
   
 
-  if(checking) {
-    return (<h5>Espere...</h5>)
-  }
+  // if(checking) {
+  //   return (<h5>Espere...</h5>)
+  // }
 
   return (
     <Routes>

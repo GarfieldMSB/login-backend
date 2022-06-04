@@ -28,6 +28,11 @@
     width: 100%;
 }
 
+.pass-conditions {
+    display: flex;
+    margin-left: 15px;
+}
+
 @media only screen and (min-width: 320px) {
     /* For mobile phones */
     .card-container{
