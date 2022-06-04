@@ -68,8 +68,6 @@ export const LoginScreen = () => {
             Login
           </Typography>
         </div>
-
-
         <Card className="card-container" sx={{ mb: 20 }}>
 
           <Formik
@@ -83,7 +81,7 @@ export const LoginScreen = () => {
 
               if (!lPassword) {
                 errors.password = 'Debe ingresar una contraseña'
-              }else if(!expressions.password.test(lPassword)){
+              } else if (!expressions.password.test(lPassword)) {
                 errors.password = 'Debe ingresar una contraseña válida'
               }
 
@@ -97,45 +95,50 @@ export const LoginScreen = () => {
                   rowSpacing={2}
                   columnSpacing={{ xs: 1, sm: 2, md: 1 }}
                 >
-                  <TextField
-                    fullWidth
-                    label="Correo"
-                    id="email"
-                    margin="normal"
-                    name="lEmail"
-                    value={lEmail}
-                    onChange={handleLoginInputChange}
-                    onBlur={handleBlur}
-                  />
-                  {errors.email && <Typography variant="body1" sx={{ color: 'red' }}>{errors.email}</Typography>}
-
-                  <FormControl sx={{ width: "100%" }} variant="outlined">
-                    <InputLabel htmlFor="outline d-adornment-password">
-                      Password
-                    </InputLabel>
-                    <OutlinedInput
-                      id="password"
-                      name="lPassword"
-                      type={values.showPassword ? "text" : "password"}
-                      value={lPassword}
+                  <Grid item xs={12}>
+                    <TextField
+                      fullWidth
+                      label="Correo"
+                      id="email"
+                      margin="normal"
+                      name="lEmail"
+                      value={lEmail}
                       onChange={handleLoginInputChange}
                       onBlur={handleBlur}
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton
-                            aria-label="toggle password visibility"
-                            onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPassword}
-                            edge="end"
-                          >
-                            {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                      label="Contraseña"
                     />
-                    {errors.password && <Typography variant="body1" sx={{ color: 'red' }}>{errors.password}</Typography>}
-                  </FormControl>
+                  </Grid>
+
+                  {errors.email && <Typography variant="body1" sx={{ color: 'red' }}>{errors.email}</Typography>}
+                  <Grid item xs={12}>
+                    <FormControl sx={{ width: "100%" }} variant="outlined">
+                      <InputLabel htmlFor="outline d-adornment-password">
+                        Password
+                      </InputLabel>
+                      <OutlinedInput
+                        id="password"
+                        name="lPassword"
+                        type={values.showPassword ? "text" : "password"}
+                        value={lPassword}
+                        onChange={handleLoginInputChange}
+                        onBlur={handleBlur}
+                        endAdornment={
+                          <InputAdornment position="end">
+                            <IconButton
+                              aria-label="toggle password visibility"
+                              onClick={handleClickShowPassword}
+                              onMouseDown={handleMouseDownPassword}
+                              edge="end"
+                            >
+                              {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                            </IconButton>
+                          </InputAdornment>
+                        }
+                        label="Contraseña"
+                      />
+                      {errors.password && <Typography variant="body1" sx={{ color: 'red' }}>{errors.password}</Typography>}
+                    </FormControl>
+                  </Grid>
+
                   <Link to="../register">
                     <Typography sx={{ margin: '10px' }} variant="body2">¿No se encuentra registrado? Click aquí</Typography>
                   </Link>

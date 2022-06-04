@@ -1,13 +1,12 @@
 *{
     margin: 0;
     padding: 0;
+    justify-content: center;
 }
 
 .container {
     background-color: #F1ECEB;
     display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .card-container {
@@ -18,12 +17,10 @@
 .auth-button {
     width: 100%;
     display: flex;
-    justify-content: center;
     margin-top: 20px;
 }
 .auth-tittle {
     display: flex;
-    justify-content: center;
     margin: 40px 0 35px 0;
     width: 100%;
 }

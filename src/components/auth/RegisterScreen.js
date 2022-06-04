@@ -108,7 +108,6 @@ export const RegisterScreen = () => {
             Register
           </Typography>
         </div>
-        <Box container>
           <Card className="card-container" sx={{ mb: 20 }}>
             <Formik
               validate={() => {
@@ -341,12 +340,8 @@ export const RegisterScreen = () => {
                   </div>
                 </>
               )}
-
             </Formik>
           </Card>
-        </Box>
-
-
       </div>
     </div >
   );
