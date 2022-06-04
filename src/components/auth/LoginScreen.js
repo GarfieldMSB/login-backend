@@ -106,9 +106,9 @@ export const LoginScreen = () => {
                       onChange={handleLoginInputChange}
                       onBlur={handleBlur}
                     />
+                    {errors.email && <Typography variant="body1" sx={{ color: 'red' }}>{errors.email}</Typography>}
                   </Grid>
-
-                  {errors.email && <Typography variant="body1" sx={{ color: 'red' }}>{errors.email}</Typography>}
+                  
                   <Grid item xs={12}>
                     <FormControl sx={{ width: "100%" }} variant="outlined">
                       <InputLabel htmlFor="outline d-adornment-password">
