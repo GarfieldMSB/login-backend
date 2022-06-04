@@ -24,7 +24,7 @@ import nextId from "react-id-generator";
 import "./LoginScreen.css";
 import { startChecking, startRegister } from "../../actions/auth";
 import { expressions } from "../../helpers/expressions";
-import { Formik } from "formik";
+import { Form, Formik } from "formik";
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -148,9 +148,11 @@ export const RegisterScreen = () => {
 
                 return errors;
               }}
+
+              
             >
               {({ errors, handleBlur }) => (
-                <>
+                <form onSubmit={handleRegister}>
                   <Grid
                     container
                     rowSpacing={2}
@@ -329,16 +331,15 @@ export const RegisterScreen = () => {
                   <div className="auth-button">
                     { }
                     <Button
-                      onClick={handleRegister}
+                      type="submit"
                       variant="contained"
                       color="success"
                       sx={{ p: "20 10%" }}
-                      type="submit"
                     >
                       Registrar
                     </Button>
                   </div>
-                </>
+                </form>
               )}
             </Formik>
           </Card>

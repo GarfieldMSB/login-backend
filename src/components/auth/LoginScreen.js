@@ -89,7 +89,7 @@ export const LoginScreen = () => {
             }}
           >
             {({ errors, handleBlur }) => (
-              <>
+              <form onSubmit={handleLogin}>
                 <Grid
                   container
                   rowSpacing={2}
@@ -148,7 +148,7 @@ export const LoginScreen = () => {
 
                 <div className="auth-button">
                   <Button
-                    onClick={handleLogin}
+                    type="submit"
                     variant="contained"
                     color="success"
                     sx={{ p: "20 10%" }}
@@ -156,7 +156,7 @@ export const LoginScreen = () => {
                     Iniciar sesión
                   </Button>
                 </div>
-              </>
+              </form>
             )}
           </Formik>
         </Card>
