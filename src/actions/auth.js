@@ -12,7 +12,7 @@ export const startRegister = (
   password
 ) => {
   return async (dispatch) => {
-    dispatch(startLog());
+    dispatch(startRegis());
     //const uid = new Date().getTime();
     const resp = await fetchSinToken(
       "auth/new",
@@ -29,6 +29,7 @@ export const startRegister = (
         })
       );
       navigate("login");
+      dispatch(finishRegister())
       Swal.fire("¡Buen trabajo!", body.msg, "success");
     } else {
       Swal.fire("Error", body.msg, "error");
@@ -80,9 +81,7 @@ export const startChecking = () => {
   };
 };
 
-const checkingFinish = () => ({
-  type: types.authChekingFinish,
-});
+
 
 const startLog = () => ({
   type: types.authStartLogin,
@@ -93,9 +92,19 @@ const login = (user) => ({
   payload: user,
 });
 
-const register = (user) => ({
+const startRegis = () => ({
   type: types.authStartRegister,
+})
+
+const register = (user) => ({
+  type: types.authRegister,
   payload: user,
+});
+
+const finishRegister = () => ({type: types.authFinishRegister})
+
+const checkingFinish = () => ({
+  type: types.authChekingFinish,
 });
 
 export const startLogout = () => {

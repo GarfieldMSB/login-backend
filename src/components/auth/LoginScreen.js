@@ -57,7 +57,6 @@ export const LoginScreen = () => {
       return Swal.fire("Error", "Debe llenar los campos", "error");
     }
     dispatch(startLogin(lEmail, lPassword));
-    dispatch(startChecking())
   };
 
   return (

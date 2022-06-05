@@ -24,7 +24,7 @@ import nextId from "react-id-generator";
 import "./LoginScreen.css";
 import { startChecking, startRegister } from "../../actions/auth";
 import { expressions } from "../../helpers/expressions";
-import { Form, Formik } from "formik";
+import { Formik } from "formik";
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 
